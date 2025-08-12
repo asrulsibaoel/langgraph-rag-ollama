@@ -1,0 +1,31 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama_data:/data
+    restart: unless-stopped
+
+  backend:
+    image: your-backend-image:latest
+    container_name: backend
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_API=http://ollama:11434
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  frontend:
+    image: your-frontend-image:latest
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - BACKEND_API=http://backend:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
