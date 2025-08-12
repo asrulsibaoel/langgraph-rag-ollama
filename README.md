@@ -113,7 +113,7 @@ flowchart TD
 ---
 
 ## 🛠 Troubleshooting
-- **405 Method Not Allowed** → Make sure frontend uses `GET` for streaming and matches backend route.
+- **405 Method Not Allowed** → Make sure frontend uses `POST` for streaming and matches backend route.
 - **Metric type not match** → Ensure Milvus collection uses `COSINE` if embeddings are normalized.
 - **Slow queries** → Batch inserts and enable index creation in Milvus.
 
